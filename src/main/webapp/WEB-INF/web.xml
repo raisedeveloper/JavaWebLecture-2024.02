@@ -51,13 +51,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ㄸㅌ02_ㅖㅁㄱ믇ㅅㄷㄱ</display-name>
-    <servlet-name>ㄸㅌ02_ㅖㅁㄱ믇ㅅㄷㄱ</servlet-name>
-    <servlet-class>ch06_basic.ㄸㅌ02_ㅖㅁㄱ믇ㅅㄷㄱ</servlet-class>
+    <display-name>Ee02_Parameter</display-name>
+    <servlet-name>Ee02_Parameter</servlet-name>
+    <servlet-class>ch06_basic.Ee02_Parameter</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ㄸㅌ02_ㅖㅁㄱ믇ㅅㄷㄱ</servlet-name>
-    <url-pattern>/ㄸㅌ02_ㅖㅁㄱ믇ㅅㄷㄱ</url-pattern>
+    <servlet-name>Ee02_Parameter</servlet-name>
+    <url-pattern>/Ee02_Parameter</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
