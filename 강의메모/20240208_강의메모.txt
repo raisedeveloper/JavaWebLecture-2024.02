@@ -1,0 +1,85 @@
+새션이라는 메모리를 유지-누군가 사용하면
+자바스페이스 자바에서 액세스할 수 있는 것 같이 등록되어 있는 것은  session이 가능함
+현재 session의 사용자는 누구? (사용자의 이름은 무엇인가?)
+기술적으로 보면 로그인이 별게 아님
+session을 보고 로그인을 했다 안했다를 판별함
+session을 파괴하는 것이 로그아웃임
+http 라는 것 : ex 전화걸 때 다이얼링 - 상대가 받으면 -통화 - 통화 종료
+메세지 카톡 : 아무 때나 보냄 - 상대가 언제 받을 지 모름 - 확인하면 답장옴
+전화거는 것 - connection oriented 연결 위주 - 연결에 기반한 통신 방식
+카톡 메세지 - connection list 연결이 없는 http가 connetion oriented 가 아니라 connection list 방식임
+로그인 했다 안했다는 session으로 판단함 - 특별한 session의 유무로 가림
+목록이 나오면 (erm에서) 게시글 목록이 나올 시 목록에 표시되어야 할 항목 : 
+아이디(있으나 없으나 상관 없음) , 타이틀[댓글수], 컨텐트X, 이름X 대신 uname(nickname), 조회수
+id - title - uname - LocalDate/Time(지금 막 작성한 것) - 조회수
+bid - title[replyCount] - uname - modTime - viewCount
++--------+ +----------+
+|검색창 ▼| | 검색단어 |
++--------+ +----------+
+설연휴 끝나고 웹서버를 배우고 난 후 미니프로젝트 4일간의 분량 - 게시판 만들기 or 일정표 만들기
+
+몽땅다 생성자
+기본 생성자
+아이디 생성자 없는 생성자
+
+board를 null;로 해놨으니 정보를 가져와야 함
+제일 처음에 가져와야 할 것은 자료형이 int임 = (rs.getInt(1)) == 코드 구현
+최종 코드 == board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), 
+rs.getString(4), LocalDateTime.palse(rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9)); 
+
+다음 주 부터
+Java EE perspective 를 사용할 예정 
+
+*about spell mistake
+보드테이블에 집어넣는 값
+title
+content 
+uid
+
+if you spelling miss = won't insert
+
+test == Main
+--------------------------------------------------------------------------------------------------------------------
+오후에는 reply 강의
+
+
+package mysql.sec07_bbs.appl;
+
+import mysql.sec07_bbs.dao.ReplyDao;
+import mysql.sec07_bbs.entity.Reply;
+
+public class ReplyDaoTest {
+
+	public static void main(String[] args) {
+		ReplyDao rDao = new ReplyDao();
+		String sessionUid = "james";
+		
+		Reply r = new Reply();
+		r.setComment("댓글 1"); r.setUid(sessionUid); r.setBid(16);
+
+
+16 이면  veiwCount가 하나 늘어나는 이상한 현상이 발생 ==> 12로 변경 (자신의 사정에 맞게 바꾸기)
+
+--필드나 검색어를 아무것도 넣지 않으면 둘 중에 하나가 걸림--
+1. 필드값이 널이거나 
+2. 필드값이 빈스트링
+
+MySQL 강좌 오늘 종료
+실전에서는 
+현재는 작업이 길어졌지만 스프링부트 배운 후에는 Dao 같은 것이 interface로 바뀜
+코드작성이 아니라 인터페이스만 작성하면 됨
+반복적인 작업은 없어짐
+하지만 모르고 작성하면 의미가 없어짐
+그러므로 그런 것들을 배우기 위한 시간으로 생각하면 됨
+
+if 풀스텍 이라면 DB를 포함하는 작업이다. 필수! 
+program은 서로 유기적으로 얽혀있으니 foreign key 에 대한 개념 확립 필요!
+--다음주 학습 예고--
+localhost:8080/bbs/board?p=1&f=title&q=검색어 : 이런식으로 전달됨 == 페이지 / 필드 / 쿼리
+다이나믹 웹 프로젝트
+서블릿 : jsp or sublit page
+자바에서 기본적으로 다루는 웹의 기술, 웹 화면쪽에서 보여주는 기본적인 기술을 배울 것
+미니 프로젝트를 할 수 있도록 메이븐 프로젝트를 설명해 줄것임
+둘 다 웹 서버를 사용하게 됩니다
+아파치 톰캣을 사용하게 될 것임
+화요일에는 아파치 톰캣을 설치 - 이클립스를 자바EE버전으로 change하고 향후 잘하려면 늦지말기

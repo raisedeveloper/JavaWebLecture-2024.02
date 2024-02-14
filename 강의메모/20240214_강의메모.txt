@@ -1,0 +1,142 @@
+수업전 리뷰
+
+자바개발 코드와 분리시키기
+
+jsp는 화면에 잘 보이지 않아 불편합니다. 하지만 타임리프를 사용하면 html 코드 짜듯이 vs 처럼 작업할 수 있습니다. 
+모양도 보면서 작업할 수 있다는 장점이 있습니다. jsp만을 사용하면 불편합니다.
+
+어제 했던 내용 중에서 웹서버와 클라이언트가 데이터를 주고받는게 가장 중요하고 가장 어려워하는 부분이 될 수 있습니다.
+데이터를 받아서 처리하고 결과를 되돌려주는데 우선 받는 것이 어려울 것입니다.
+
+--1교시--
+Form tag 에 들어가는 부분 = @WebServlet("/ch06/calc")
+
+<form> action rowting
+<input> server name = num1 name은 서버가 사용합니다.
+javascript 에서 사용하는 id (controll할때 사용합니다.)
+class 는 CSS가 사용합니다.
+
+--2교시--
+Calculator
+public class Ex03_Calculator2 강의
+RequestDispatcher rd = request.getRequestDispatcher("/ch06/calc.jsp");
+Parameter = 정확하게 이름이 일치해야 합니다.
+주소와 파라메터는 기록을 하시기 바랍니다.
+파라메터 값을 설정해야한다면 역시 기록을 해두세요.
+기록하는 방법은 : request.setAttribute("num1",num1); 입니다.
+
+웹페이지에서 다른 쪽 페이지로 이동을 하게 만들 수 있습니다.
+페이지 전환하는 것은 rd.forward 방법이 있습니다.
+이 외의 방법은 이하와 같습니다.
+1. 자바코드 calulator = servlet 	>> forward로 parameter를 전달할 수 있습니다.	>> jsp file = servlet 
+
+
+2. 클라이언트를 이용하는 방법이 있습니다. 개발자가 client에게 던져서 redirect 합니다.
+
+what is redirect?  웹 서버에서 PC에게 날리는 것입니다. 요청을 전달합니다.
+화면으로 내려보내주도록 할 수 있습니다.
+
+// 두 번째 방법 redirection 을 이용하여 호출 
+		String url = "/jw/ch06/calc2?num1=" + num1 + "%num2=" + num2 + "&result=" + result;
+		response.sendRedirect(url);
+
+url을 do get 에서 전달 받습니다.
+
+http://localhost:8080/jw/ch06/calc2 최초의 주소에서 연산 후 이하와 같은 주소를 호출해줍니다.
+/jw/ch06/calc2?num1=45&num2=23&result=22 server >> Client >> Server 에게 주소를 호출해줍니다.
+
+나머지 html 코드는 변하지 않고 변하는 것은 연산만 변하는것 입니다.
+에이젝스 : 필요한 데이터만 처리
+리액트 : data만 받아서 처리
+서버에서 필요한 것만 발췌해서 서로 주고 받는 것 = Json을 사용합니다. >> 추후 서버 구현을 위해 필요한 것입니다.
+웹페이지 활용은 서로 정보를 주고 받고 페이지간의 이동 하는 것입니다.
+
+--3교시--
+주소를 주는 것은
+@WebServlet("/ch06/register") 입니다.
+form을 제공해주는 것이 get 의 역할입니다.
+예시 :
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/ch06/registerForm.jsp");
+		rd.forward(request, response);
+
+//default 값을 지정하지 않으면 get 입니다.
+<input type="submit"><br><br> button 으로 해도 결과(표현형태)는 같습니다.
+
+
+<input type="text" name="uid" placeholder="아이디"><br><br> 이 코드의 name 부분과 getParameter("uid") 가 
+입력 form 을 처리해주는 역할과 정확히 같아야 합니다. ** 에러방지 **
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+String uid = request.getParameter("uid");
+
+**uid 가 이미 존재하는지 중복 확인 장치를 추가해야 합니다.
+**pwd 와 pwd2의 일치 여부 확인 장치를 추가해야 합니다.
+		// uid 가 이미 존재하는지 중복 확인 장치를 추가해야 합니다. DAO에서 null 값이 있는지 확인 해줍니다.
+		// pwd 와 pwd2의 일치 여부 확인 장치를 추가해야 합니다. equals 를 사용합니다.
+		// 입력된 값으로 User 객체를 반듭니다.
+		// UserService 라고 예를 들때, registerMember를 호출하려면 DB에 등록 해야합니다.
+		// 환영 메세지와 함께 로그인 창으로 보내줘야 합니다.
+
+
+호조 스타일의 코드를 작성해줍니다.
+User class 작성
+
+jsp file을 두개 작성하면 코드가 간결해집니다.
+하나일 경우 복잡한 코드를 작성해야하는 불편함이 있습니다.
+
+<table> style padding 추가 합니다. 3px
+
+calculation 은 개별변수로 보내주었지만 User에서는 객체를 넘겨서 작성하겠습니다.
+${user.uid} 객체는 이와같이 써서 읽을 수 있게 작성해줍니다.
+
+--4교시--
+웹 서버에서 어떤 주소를 날렸습니다. 대게 주소를 날리면get이 됩니다.
+화면을 내립니다. 주소 -> get -> 입력화면 화면에는 form 태그가 있어서 입력을 다 하고 난 후에는
+화면출력을 주소로 보냅니다. host주소로 변환하여 보내줍니다. (나의 이클립스에 보여지는 주소에는 host추가되어있음)
+get 은 주소를 받습니다.
+host 화면을 처리합니다.
+
+로그인을 만들어보세요. (활동)
+/jw/ch06/login 주소를 입력하면
+로그인 하는 웹페이지가 뜨도록 만들어 보세요.
+결과는 로그인
+주소는 /jw/ch06/login 이고, 처리하는 폼은 (보여주는 화면은) == login form 이 될 것입니다.
+결과를 처리한 후의 form은 loginResult.jsp 가 될 것입니다.
+get 방식 입력하는 form
+처리하는 방식은 Result.jsp
+
+1.uid = james, pwd=1234 일 때 
+화면에 출력을
+제임스님 환영합니다.
+가 되게 하세요.
+
+2. uid가 james가 아니면 uid! = james
+id 가 잘못된 아이디입니다. 라는 표시가 나오게 하세요.
+
+3. 패스워드가 1234가 아니면 pwd!=1234 
+패스워드가 틀렸습니다. 를 출력하게 하세요.
+
+--5교시--
+실행 후 결과 : uid does not exist / login success => 초기화면으로 이동시켜주어야 합니다. ==> 프로젝트 상황 참조
+사용자 카테고리(목록)를 보여주는 화면 (개별 사용자) / 사용자 insert / update / delete 5개의 화면이
+서로 어떻게 유기적으로 엮이게 하면서 구현할 것인가가 프로그램의 핵심입니다.
+therefore, 기본 화면 구성과 함께 bbs 5~6개 몇 가지 추가 시 10~20개의 화면이 구성되는데 이것들이 유기적으로 엮이도록 하는 것이 프로그래밍입니다.
+이것만이 아니라 style을 추가해주어야 합니다. CSS는 절대 쓰지말고 Bootstrap을 참조해서 그렇게 코드를 가져가시기 바랍니다.
+
+--6교시--
+지난번 프론트 학습에서 마지막 bootstrap 23번이 회원가입 입니다.
+그것을 참고하여 register를 구현해보세요.
+DB를 엑세스 해서 사람들에게 보여주는 것
+내일부터 DB를 다루어야해서 반드시 기억해야합니다.
+
+입력 form을 보여줄 때 html도 상관없지만 차츰 jsp를 사용하는지, 주소를 숨겨야하는지 알게될것입니다.
+get과 postㅡ\ method를 이용해서 처리하는 것
+서버와 연결되는 것이 action
+input name 같은 연결되는 고리를 놓치지 말아야합니다
+jsp file에게 파라미터 값을 넘길 때에는 어떻게 넘기나요?
+request.setAttribute == 자주 사용하지만 잊기 쉽습니다. 기억하시기 바랍니다.
+jsp에서는 $로 표현해서 나타낼 수 있습니다. (request.setAttribute를)
+가장 기본적인 형태로 데이터를 읽고 쓰고 할 수 있어야 앞으로의 학습에 무리가 없을 것입니다.
+웹 서버에서 데이터 베이스를 배우도록 하겠습니다.
+지금까지는 DB connection을 DAO로 묶어서 했지만
+DBCP라고 하는 것을 배우며 차이점을 느끼게 될 것 입니다.

@@ -1,0 +1,299 @@
+90년대 말 - 컴퓨터 보급 => 기업체 홈페이지 작성 시작
+현재 아는 홈페이지와는 다른 정적인 홈페이지 Static type 였음 => 웹 서버에서 돌아가는 형태
+2000년대 - 동적인 것을 보여주고 싶은 욕구 생김
+게시판에서 글을 가져온다든지 쇼핑몰에서 정보를 가져온다던지
+2000년대 초반 - 웹 개발 APM = Apache web server / P : PHP / M : MySQL  == 앞머리 철자 CGI 타입의 홈페이지
+웹서버의 변화로 인해 웹서버가 아닌 웹 어플리케이션 서버 WS + WAS(와스) WAS(와스): 제우스 웹 스피어 웹 로직스 등등 
+기업체에서 물건을 파는 것
+ WS + WAS(와스) 현재는 잘 구분하여 사용하지 않음
+
+오늘 다운받을 것은 apache tomcat 
+자바 입장에서 2000년대 초반 apm 
+자바 쪽에 서블릿 Java Servlet(조각)
+Servlet 1. 서버 Controller 
+	2. viewer 서브릿으로 쓸 수 있지만 서블릿으로 만들어 주는 쉬운 예가 JSP임
+	=> 자바 코드가 아닌 HTML 코드가 사용됨 => 자바 웹 개발 : 현재는 스프링 부트 (처음엔 스프링이 먼저 나옴)
+스프링은 배보다 배꼽이 더 큰 패키지 => 설정이 매우 복잡함 compulation 스프링부트로 넘어오면서 설정이 쉬워짐
+JSP => Thymeleaf 다양한 기술이 혼재되어있음
+무엇을 가르치면 좋을까 라는 고민
+=> JSP를 먼저 할 예정
+library Jsoup Json DB 하는 데도 사용했을 때 직접 설정했는데
+사용할 라이브러리가 많아지면 앞으로는 버전간의 호환성 문제가 생김
+코드가 달라져야하는 문제가 생김 => 패키지 관리해주는 것이 필요 == 메이븐 , 그레이들 두가지 형태 사용
+우리는 메이븐을 사용할 것
+파이썬은 아나콘다 라는 패키지 관리자가 있음
+톰캣의 버전이 여러가지 있음
+톰캣 9 / 톰캣 10 사이의 문제 : 자바 X (패키지 이름) Sun microsoft move to Oracle
+톰캣9 자바 X
+톰캣10 jakarta 로 이름 바꿔서 사용해야 함 (자카르타)
+톰캣 9 이하는 앞으로 지원하지 않을 것으로 예정
+
+설치 후 localhost ( 나의 IP주소 : TCP IP - IP V4 4바이트 : 20억개의 데이터 현재 IP V6 16바이트)
+
+아이피 주소를 알아보는 방법 : C:\tools\apache-tomcat-10.1.18-windows-x64\apache-tomcat-10.1.18\bin>ipconfig (cmd)
+ IPv4 주소 . . . . . . . . . : 192.168.0.44 (결과창)
+C:\tools\apache-tomcat-10.1.18-windows-x64\apache-tomcat-10.1.18\bin>192.168.0.08 핑테스트 : 물리적 연결 확인 방법
+TCP == 주소 10bit 사용 tcp 주소는 16 bit => port => 집 안에서 어떤 방으로 갈 것인가를 정하는 것 TCP임
+배포를 할 때 AWS를 쓸 것임 => 기본적인 컴퓨터 사항을 알고 있으면 좋음
+
+src>		java 	Java 프로그램
+
+localhost:8080/just/	=> webapp의 위치 == contest root
+		
+
+		webapp	HTML, JSP 화면
+
+글자 하나라도 고치면 안돌아감
+
+C:\workspace\Java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\just\org\apache\jsp
+
+localhost:8080/just/hello.jsp  요청 -> TOmcat hello_jsp.java compile 번역 => hello.jsp.class => 화면 표출 (깊게 알필요는 없지만 이와 같은 매커니즘은 내부적으로 돌아간다는 것만 기억하면 됨)
+
+도메인 홈페이지 주소
+shopping.human.com
+
+com.human
+    |
+---------
+|   |   |
+sh bbs weather  (sh : shopping)
+
+http://localhost:8080/jw/ch05/hello 밑의 주소와 같은 서버가 뜸
+http://localhost:8080/jw/ 만 쳐도 같은 웹이 뜨는 이유 : 웰컴 파일이 있기 때문 (in servers > tomcat> web.xml file)
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+
+--get, post 요청--
+public class Ex01_FirstServlet extends HttpServlet {
+	// Get 방식의 요청이 왔을 때 처리해주는 코드
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	}
+
+	/**
+	 * Post 요청이 왔을 때 처리해주는 코드
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+get 	방식으로 들어온 요청 처리
+post	방식으로 들어온 요청 처리
+
+
+요청을 받는 것 : 리퀘스트 request
+내려보내주는 것 : 리스펀스 respons
+
+localhost:8080/jw/hello
+localhost 라는 집에 8080 방으로 들어감 jw 가구의 hello 라는 상자를 여는 것 == it's a full adress
+
+webapp 주소
+
+라이프 싸이클에 대해 알아보겠습니다
+
+package ch05;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/ch05/life")
+public class Ex02_Life extends HttpServlet {
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println("init() method");
+	}
+
+	public void destroy() {
+		System.out.println("destroy() method");
+	}
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("service() method");
+		doGet(request, response);
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doGet() method start");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("doGet() method stop");
+	}
+}
+
+웹브라우저에서 life 주소 검색 : http://localhost:8080/jw/ch05/life ==> 웹 서버 화면 출력 내용 Served at: /jw
+
+웹 서버 시작 init
+죽을 때 destroy
+어디서 프로그램을 작성하면 될까요?
+
+프로젝트를 할 때에는 이하와 같은 모양이 됩니다.
+
+컨테스트가 bbs일 경우
+
+localhost:8080/bbs
+
+/user/list, uid 값을 줘서 어떤 사람의 정보를 볼 수도 있습니다.
+register update delete method도 가능합니다.
+
+/user/list
+/user/register	== 사용자 등록 form(양식)을 주는 것은 Get, post 입니다.
+	Get, post
+/user/view/james(ui값) == 사용자 조회
+/user/update
+	Get, post
+/user/delete
+
+user controller
+
+이와 같은 주소를 만나면 이 것을 처리하는 곳은 하나의 컨트롤러(하나의 서블릿)에서 처리하는 것이 대부분 입니다.
+또, bbs 를 다루면 게시판 서비스를 하게 될 것입니다.
+
+/board/list
+/board/detail
+/board/insert
+	Get, post
+/board/update
+	Get, post
+/board/delete
+
+board controller
+
+접근제한자 protected service 이것은 public service가 protected service를 부릅니다.
+
+get과 post가 혼재되어 있을 때 post만 있을 때 사용되는 것이 다르지만 이 내용은 작업에 있어 그다지 중요하지 않습니다.
+do get / do post 를 사용한다는 것을 아는 것이 중요합니다.
+
+
+
+
+--servlet mapping--
+
+package ch06_basic;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/ch06/requestMethod")
+public class Ex01_RequestMethod extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String contextPath = req.getContextPath();
+		String method = req.getMethod();
+		String requestUri = req.getRequestURI();
+		String serverName = req.getServerName();
+		String servletPath = req.getServletPath();
+		String pathInfo = req.getPathInfo();
+		
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		String html = "<!DOCTYPE html>"
+				+ "<html>"
+				+ "<head>"
+				+ "<meta charset=\\\"UTF-8\\\">"
+				+ "<title>Request Method</title>"
+				+ "</head>"
+				+ "<body>"
+				+ "<h1>HttpServletRequest의 다양한 메소드</h1>"
+				+"<hr>"
+				+"<ul>"
+				+ "<li>contextPath=" + contextPath + "</li>"
+				+ "<li>contextPath=" + method + "</li>"
+				+ "<li>contextPath=" + requestUri + "</li>"
+				+ "<li>contextPath=" + serverName + "</li>"
+				+ "<li>contextPath=" + servletPath + "</li>"
+				+ "<li>contextPath=" + pathInfo + "</li>"
+				+"</ul>"
+				+ "</body>"
+				+ "</html>";
+	}
+}
+
+
+http://localhost:8080/jw/ch06/requestMethod 주소에 따른 웹 서버의 표현 내용은 이하와 같습니다.
+
+HttpServletRequest의 다양한 메소드
+contextPath=/jw
+contextPath=GET
+contextPath=/jw/ch06/requestMethod
+contextPath=localhost
+contextPath=/ch06/requestMethod
+contextPath=null
+
+
+ jsp 는 곧 servlet 이 됩니다.
+서블릿이 된 다는 이야기는 request, response가 있다는 이야기 입니다.
+ request, response 여기에 무엇을 던져줄 수 있냐면, request method servlet에게 던져 줄 수 있습니다.
+던져 줄 수 있는 공간은 request를 통해서 가능합니다.
+이것은 비전을 보기 위한 것이니 이해를 하고 넘어가면 됩니다.
+
+package ch06_basic;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/ch06/requestMethod2")
+public class Ex01_RequestMethod2 extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String contextPath = req.getContextPath();
+		String method = req.getMethod();
+		String requestUri = req.getRequestURI();
+		String serverName = req.getServerName();
+		String servletPath = req.getServletPath();
+		String pathInfo = req.getPathInfo();
+		
+		res.setContentType("text/html; charset=utf-8");
+		req.setAttribute("contextPath", contextPath);
+		req.setAttribute("method", method);
+		req.setAttribute("requestUri", requestUri);
+		req.setAttribute("serverName", serverName);
+		req.setAttribute("servletPath", servletPath);
+		req.setAttribute("contextPath", pathInfo);
+		RequestDispatcher rd = req.getRequestDispatcher("/ch06/requestMethod.jsp");
+		rd.forward(req, res);
+	}
+}
+
+--주소를 달리했을 때--
+http://localhost:8080/jw/ch06/params?id=101&title=title
+id: 101, title: title
+http://localhost:8080/jw/ch06/params?id=101&title=
+빈 char 이 됨	id: 101, title: 
+http://localhost:8080/jw/ch06/params?id=101&title=%ED%83%80%EC%9D%B4%ED%8B%80 (타이틀)
+인코딩해서 감 id: 101, title: 타이틀
+
+http://localhost:8080/jw/ch06/params?id=&title=%ED%83%80%EC%9D%B4%ED%8B%80 (타이틀)
+int id = Integer.parseInt(id_); 해서 오류남
+
+http://localhost:8080/jw/ch06/params?id=&title=%ED%83%80%EC%9D%B4%ED%8B%80 (타이틀)
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	String id_ = req.getParameter("id");
+//	int id = Integer.parseInt(id_);		
+// id 값이 안들어오면 예외 발생
+	int id = 0;		
+//입력이 안됬을 때 사용하는 기본값
+	if(id_ !=null && ! id_.equals("")) 	
+// 이 두가지 경우가 다 아니어야 id = Integer.parseInt(id_); 가 됨
+	id = Integer.parseInt(id_);	
+id: 0, title: 타이틀
