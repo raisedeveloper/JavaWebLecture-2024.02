@@ -1,0 +1,95 @@
+--1교시--
+다운로드 된 파일은 보기 편하지만 동적인 이미지는 코드가 복잡하고 불편해 나중에 진행. -- 스프링부트에서 편하게 가능
+프로그램 바깥에서는 바로 외부 파일을 바로 연결할 수 없기 때문에 jw 를 모두 추가해 주어야 함.
+즉, 이미지 경로는 /jw/img 이고, ch06폴더에 있을 경우 /jw/ch06이라는 path를 정확히 지정해주어야 제대로 나온다.
+
+register를 어떤 jsp 파일을 사용하냐에 따라 java의 doGet 메소드의 path를 제대로 지정해야 함.
+console 을 통해 오류메시지 확인해서 오류 찾기.
+
+DBCP의 개념 (DataBase Connection Pool)
+DB가 있으면 내 코드가 Connection을 통해 전화하듯 연결 (데이터 통신) 이후 Connection close
+이렇게 연결하고 끊는것이 비효율적임
+예를들어 티켓팅, 수강신청같이 서버가 다운되는 현상이 발생할 수 있음
+
+따라서 연결을 하고, 끊는것을 하지 말고, 이미 Pool에 형성되어있는 DB connection을 쓰고 Pool에 반납하면 됨.
+라이브러리를 특정 위치에 꽂아 넣어 주어야 함.
+webapp > WEB_INF > lib 폴더에 copy해 추가함.
+
+개발, QA, Production server가 각각 있음. 각 라이브러리 단계에서 성공적으로 진행되면 다음 단계로 넘어감.
+
+--2교시--
+이식성 (portability) : 내가 만든 코드를 어디에서 쓸 수 있는가?
+종이 다른 매체끼리의 이식성
+자바 JRE 환경에서 돌아가게 만드는 이식성
+
+portability
+source - level - C, C++ …
+binary - level - JAVA
+
+버전에 따른 호환성은 온전히 기대하기 어렵다. Back of compatitive?
+java17에서 개발한 것을 java 8에서 돌아가게 하는 하위 호환성은 일정부분가능
+
+*현재 개발과 회사 개발의 다른 점
+-현재(배우는 과정)
+현재 사용 중인 컴퓨터 환경 하나만 동작해도 성공
+
+-회사
+인터넷의 모든 버전 크롬, 사파리 등 모든 브라우저를 테스트하고 배포됩니다.
+모바일이라면 과거부터 현재부터 가지고 있던 기기에 테스트를 하고 배포됩니다.
+
+--3교시--
+*기본 웹 서버 주소
+http://localhost:8080/jw/ch07/city/search
+결과 출력 : City [id=2340, name=수원, countryCode=KOR, district=Kyonggi, population=1200000]
+
+*기본 주소에 ?id=2331 추가
+http://localhost:8080/jw/ch07/city/search?id=2331
+결과 출력 : City [id=2331, name=Seoul, countryCode=KOR, district=Seoul, population=9981619]
+
+--6교시--
+오류 발생 시 확인 차트
+1. Servlet
+2. doGet
+3. doPost
+4. Dto
+5. Dao
+6. jsp
+
+--7교시--
+*git error
+warning: in the working copy of 'src/main/webapp/serverConfig/context.xml',
+
+
+LF will be replaced by CRLF the next time Git touches it
+
+*error meaning
+LF 타입으로 작성된 파일인데 git에 올라갈땐 CRLF 타입으로 변환되는 점을 알아두십시오.
+
+*흔한 오류
+-City.java(programming file name)
+private String countrycode;   c
+       	       countryCode;   C
+
+-update.jsp(programming file name)
+	       ${city.countryCode}      C
+	       ${city.countrycode}      c
+--정리--
+context xml look up 해서 정보를 찾는 방식 == DB 연결 connection 예를들어 미리 50~100개 만들어놓고 끄집어내서 사용
+요청이 오면 서블릿에서 요청을 받고 DAO 에서 처리
+서블릿에서 사용자정보를 받을 수 있고 최종적으로 웹 화면을 구현한다.
+오늘은 매 웹 페이지마다 각각의 기능을 만들어 놓는 것을 배웠습니다.
+내일은 유기적으로 각각을 하나로 엮는 작업을 할 것입니다.
+
++-----------------------------+
+|----------(내용)  수정   삭제|
+|----------(내용)   ㅁ	  ㅁ  |
+|----------(내용)   ㅁ	  ㅁ  |
+|----------(내용)   ㅁ	  ㅁ  |
+|----------(내용)   ㅁ	  ㅁ  |
++-----------------------------+
+
+**+--------------+**
+**|추가 버튼 생성|**
+**+--------------+**
+
+또한 위와 같이 '추가 버튼 생성'과 'Documentation' 을 작성하는 방법도 알려줄 것입니다.
