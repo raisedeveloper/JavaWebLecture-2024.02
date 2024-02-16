@@ -1,4 +1,4 @@
-package ch07_dao;
+package ch07_dao.CityEX;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,27 +8,34 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/ch07/city/insert")
-public class Ex03_Insert extends HttpServlet {
+//값을 가져와서 화면에 뿌려줘야 함 
+@WebServlet("/ch07/city/update")
+public class Ex05_Update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
-	// 입력 폼 보여주기
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/ch07/insert.jsp");
+		String id_ = request.getParameter("id");
+		int id = (id_ == null || id_.equals("")) ? 2340 : Integer.parseInt(id_);
+		
+		CityDao cDao = new CityDao();
+		City city = cDao.getCity(id);
+		System.out.println(city);
+		RequestDispatcher rd = request.getRequestDispatcher("/ch07/update.jsp");
+		request.setAttribute("city", city);
 		rd.forward(request, response);
 	}
 
-	// 사용자 입력 처리하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String countryCode = request.getParameter("countryCode");
 		String district = request.getParameter("district");
 		String population_ = request.getParameter("population");
 		int population = (population_.equals("")) ? 0 : Integer.parseInt(population_);
+		City city = new City(id, name, countryCode, district, population);
 		
-		City city = new City(name, countryCode, district, population);
-		CityDao cDao = new CityDao();
-		cDao.insertCity(city);
+		CityDao cDao =new CityDao();
+		cDao.updateCity(city);
 		
 		response.sendRedirect("/jw/ch07/city/list?district=" + district + "&num=30&offset=0");
 	}

@@ -1,5 +1,4 @@
-package ch07_dao;
-
+package ch07_dao.CityEX;
 /*
  * 	WEB에서 DB를 액세스하는 방법 : DBCP(DataBase Connection Pool)
  * 
@@ -17,7 +16,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class CityDao {
-
 	public Connection getConnection() {
 		Connection conn = null;
 		try {

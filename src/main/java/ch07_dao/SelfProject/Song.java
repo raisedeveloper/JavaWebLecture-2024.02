@@ -1,4 +1,4 @@
-package ch07_dao;
+package ch07_dao.SelfProject;
 
 public class Song {
 	private int sid;

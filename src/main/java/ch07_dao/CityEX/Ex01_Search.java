@@ -1,4 +1,4 @@
-package ch07_dao;
+package ch07_dao.CityEX;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

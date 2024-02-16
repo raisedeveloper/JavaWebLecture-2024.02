@@ -1,4 +1,4 @@
-package ch07_dao;
+package ch07_dao.CityEX;
 
 public class City {
 	private int id;

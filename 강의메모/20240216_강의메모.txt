@@ -30,4 +30,39 @@ PrintWriter out = response.getWriter();
 routing address를 가장 먼저 바꿔주어야합니다.
 response.sendRedirect("/jw/ch07/kcity/list?district=" + district + "&num=30&offset=0"); 중 city->kcity
 
+--4교시--
+프로그램을 어떻게 만들 수 있는지 정리하는 시간을 가져볼 것 입니다.
+
+Routing table 을 만들어 보세요
+경로 kcity method
+jw를 빼고 작성하겠습니다.
+작성한 코드에서 전부 조사하는 방법입니다.
+'/kcity/list
+
+--5교시, 6교시--
+Kpop file 설계 Project
+Song Kpop .java 생성 완료 (생성자 단)
+Girl_Group Song list.jsp 생성 완료
+Girl_Group Song insert.jsp 생성 완료
+
+--8교시--
+오늘 했던 실습내용이 MVC 입니다.
+DAo dto 주고 받고 그 역활을 해주는 것이 Controller 입니다.
+요청이 들어온 것을 처리하는 Controller.
+model DAO DTO Service Buissness file veiwer 모두 Model 이라고 통칭합니다.
+오늘 구현한 것처럼 앞으로도 웹 서버를 구현하면 됩니다.
+
+Controller를 여러개 만들면 됩니다.
+이것을 묶으면 웹 서버가 만들어지는 것입니다.
+
+CRUD 를 꼭 연습해서 하이디 SQL 구현을 능숙하게 할 수 있도록 많은 연습을 하기 바랍니다.
+
+세션과 쿠키에 대한 내용을 다음주에 다룰 것 입니다.
+로그인을 했다는 것의 의미와 로그인을 햇을 때 어떻게 되는지, 필터 적용 등을 배울 예정입니다.
+
+jsp expression language bootstrap 이용해서 웹서버와 컨트롤러를 만드는 작업을 해볼 것 입니다.
+로그인과 로그아웃 기능을 모두 추가해서 할 예정입니다.
+
+그러니 주말동안에 복습을 해 주시기 바랍니다.
+
 

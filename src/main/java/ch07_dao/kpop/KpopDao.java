@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface KpopDao {
 	
-	List<kpop> getKpopList();
+	List<Kpop> getKpopList();
 	
 	Artist getArtist(int aid);
 	
@@ -13,12 +13,13 @@ public interface KpopDao {
 	void insertArtist(Artist artist);
 	
 	void insertSong(Song song);
-
+	
 	void updateArtist(Artist artist);
 	
 	void updateSong(Song song);
-	
-	void deleteArtist(int aid);
 
-	void deleteSong(int sid);	
+	void deleteArtist(int aid);
+	
+	void deleteSong(int sid);
+	
 }
