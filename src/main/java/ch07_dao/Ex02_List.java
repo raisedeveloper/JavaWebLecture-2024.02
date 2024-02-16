@@ -24,11 +24,11 @@ public class Ex02_List extends HttpServlet {
 	  
       CityDao cDao = new CityDao();
       List<City> list = cDao.getCityList(district, num, offset);
-      list.forEach(x -> System.out.println(x));
+//      list.forEach(x -> System.out.println(x));
 
-//      RequestDispatcher rd = request.getRequestDispatcher("/ch07/list.jsp");
-//      request.setAttribute("list", list);
-//      rd.forward(request, response);
+      RequestDispatcher rd = request.getRequestDispatcher("/ch07/kcity/list.jsp");
+      request.setAttribute("list", list);
+      rd.forward(request, response);
 	
 	String data = "";
 	for (City c: list) {
