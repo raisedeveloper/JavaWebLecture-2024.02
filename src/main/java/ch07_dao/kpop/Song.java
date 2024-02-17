@@ -6,6 +6,7 @@ public class Song {
 	private String lyrics;
 	
 	public Song() { }
+	
 	public Song(String title, String lyrics) {
 		this.title = title;
 		this.lyrics = lyrics;
