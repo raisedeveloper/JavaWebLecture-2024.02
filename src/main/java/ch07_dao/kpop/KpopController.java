@@ -11,14 +11,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet({"/ch07/kpop/list", "/ch07/kpop/insertArtist", "/ch07/kpop/insertSong", 
-	"/ch07/kpop/updateArtist", "/ch07/kpop/updateSong", "/ch07/kpop/deleteArtist", "/ch07/kpop/deleteSong"})
+			 "/ch07/kpop/updateArtist", "/ch07/kpop/updateSong", 
+			 "/ch07/kpop/deleteArtist", "/ch07/kpop/deleteSong"})
 public class KpopController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private KpopDao kDao = new KpopDaoImpl();
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] uri = request.getRequestURI().split("/");
-		String action = uri[uri.length - 1];
+		String action = uri[uri.length -1];
 		String method = request.getMethod();
 		RequestDispatcher rd = null;
 		Artist artist = null;

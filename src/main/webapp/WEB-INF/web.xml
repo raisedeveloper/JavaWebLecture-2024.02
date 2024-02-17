@@ -179,4 +179,24 @@
     <servlet-name>KpopController</servlet-name>
     <url-pattern>/KpopController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MessageController</display-name>
+    <servlet-name>MessageController</servlet-name>
+    <servlet-class>ch99_PracticeProject.MessageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageController</servlet-name>
+    <url-pattern>/MessageController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MessageController2</display-name>
+    <servlet-name>MessageController2</servlet-name>
+    <servlet-class>ch99_PracticeProject.MessageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageController2</servlet-name>
+    <url-pattern>/MessageController2</url-pattern>
+  </servlet-mapping>
 </web-app>
