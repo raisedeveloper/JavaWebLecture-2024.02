@@ -1,10 +1,27 @@
 package ch99_PracticeProject;
 
+import java.sql.Connection;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import com.mysql.cj.protocol.Message;
 
 public class MessageDaoimpl implements MessageDao {
+	
+	public Connection getConnection() {
+		Connection conn = null;
+		try {
+			Context initContext = new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:comp/env/\" + \"jdbc/world\"");
+			conn = ds.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Message> getmessageList() {
@@ -17,7 +34,7 @@ public class MessageDaoimpl implements MessageDao {
 	}
 
 	@Override
-	public void insertMessage(Message message) {
+	public void insertMessage(Object message) {
 	}
 
 	@Override
@@ -29,6 +46,6 @@ public class MessageDaoimpl implements MessageDao {
 	}
 
 	@Override
-	public void insertMessage(Object message) {
+	public void insertMessage(Message message) {
 	}
 }
