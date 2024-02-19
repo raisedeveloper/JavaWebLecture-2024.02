@@ -8,11 +8,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 
-@WebServlet("/ch09/setCookie")
-public class Ex03_SetCookie extends HttpServlet {
+@WebServlet("/ch09/getCookie")
+public class Ex04_GetCookie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -20,18 +21,14 @@ public class Ex03_SetCookie extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html; charset=utf-8");
 
-		Cookie c1 = new Cookie("cookie-name", "cookie-value");
-		c1.setMaxAge(24 * 60 * 60); // 유효기간 하루
-		response.addCookie(c1);
-		
-		String kMsg = URLEncoder.encode("한글 데이터", "utf-8"); // %ED%95%9C%EA%B8%80+%EB%8D%B0%EC%9D%B4%ED%84%B0 로 자동 변환
-		Cookie c2 = new Cookie("hangul-name", kMsg);  // 한글을 쿠키에서 사용하기 위해 변환해서 넣어주어야 함.
-		c2.setMaxAge(-1); 			// 브라우저가 닫히면 사라짐.
-		response.addCookie(c2);
-		
-		out.write("<h1>현재시간: " + new Date() + "</h1>");
-		
-		
+		Cookie[] cookies = request.getCookies();
+		out.print("<h1>cookie</h1>");
+		for (Cookie c : cookies) {
+			String value = c.getName().equals("hangul-name") ? URLDecoder.decode(c.getValue(), "utf-8") : c.getValue();
+			// 한글로 정확히 표시하기 위해 decoding 을 해줌
+			out.print("<h3>" + c.getName() + ": " + value + "</h3><hr>");
+		}
+
 	}
 
 }
