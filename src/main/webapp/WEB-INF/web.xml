@@ -199,4 +199,14 @@
     <servlet-name>MessageController2</servlet-name>
     <url-pattern>/MessageController2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Ex03_SetCookie</display-name>
+    <servlet-name>Ex03_SetCookie</servlet-name>
+    <servlet-class>ch09_cookie_session.Ex03_SetCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Ex03_SetCookie</servlet-name>
+    <url-pattern>/Ex03_SetCookie</url-pattern>
+  </servlet-mapping>
 </web-app>
