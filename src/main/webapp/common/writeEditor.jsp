@@ -5,33 +5,31 @@
 <html>
 <head>
 	<%@ include file="_head.jspf"%>
+	
 	<%-- 공통된 내용 --%>
 	<%-- _head.jspf 없는 내용만 포함시켜줄 것 --%>
+	
 	<style>
-	td {
-		text-align: center;
-	}
+	td {text-align: center;}
 	</style>
+	
 	<script>
 		window.onload = function() {
-			CKEDITOR.replace('content', {
-				height : 400
-			});
+		CKEDITOR.replace('content', {height : 400});
 		}
 	</script>
 </head>
 <body>
 	<%@ include file="_top.jspf"%>
 
-	<div class="container" style="margin-top: 80px">
-	<div class="row">
-		<%@ include file="_aside.jspf" %>
-		
-		<%-- 본문 영역 - 매 페이지마다 바뀌는 부분 --%>
-			<h3>
-				<strong>글쓰기</strong>
-			</h3>
-			<hr>
+<div class="container" style="margin-top: 80px">
+<div class="row">
+	<%@ include file="_aside.jspf" %>
+	<%-- 본문 영역 - 매 페이지마다 바뀌는 부분 --%>
+	<div class = "col-9">
+		<h3><strong>글쓰기</strong>
+		</h3>
+		<hr>
 			<div class="row">
 				<div class="col-1"></div>
 				<div class="col-10">
@@ -66,5 +64,6 @@
 </div>
 
 	<%@ include file="_bottom.jspf" %>
+	
 </body>
 </html>
