@@ -4,59 +4,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>사용자 관리</title>
+   <%@ include file="../../common/_head.jspf"%>
 <style>
-th {
-   padding: 3px;
-   text-align: center;
-}
-
-td {
-   padding: 3px;
-}
+td, th {text-align: center;}
+.disabled-link{pointer-events: none;}
 </style>
 </head>
 <body>
-   <h1>
-      사용자 목록
-      <button style="margin-left: 100px"
-         onclick="location.href='/jw/ch09/user/register'">회원가입</button>
-      <span style="font-size: 16px"> <c:if test="${empty sessUid}">
-            <a style="margin-left: 100px" href="/jw/ch09/user/login">로그인</a>
-         </c:if> <c:if test="${not empty sessUid}">
-            <a style="margin-left: 100px" href="/jw/ch09/user/logout">로그아웃</a>
-            <span style="margin-left: 30px"> ${sessUname}님 환영합니다.</span>
-         </c:if>
-      </span>
-   </h1>
-   <hr>
-   <table border="1">
-      <tr>
-         <th>아이디</th>
-         <th>이름</th>
-         <th>이메일</th>
-         <th>등록일</th>
-         <th>액션</th>
-         <c:forEach var="user" items="${list}">
-            <tr>
-               <td>${user.uid}</td>
-               <td>${user.uname}</td>
-               <td>${user.email}</td>
-               <td>${user.regDate}</td>
-               <!-- 본인만 수정가능하고, 관리자와 본인이 삭제 가능. -->
-               <td><c:if test="${user.uid eq sessUid}">
-                     <a href="/jw/ch09/user/update?uid=${user.uid}">수정</a>
-                  </c:if> <c:if test="${user.uid ne sessUid}">
-                     <a href="#" disabled>수정</a>
-                  </c:if> <c:if test="${user.uid eq sessUid or sessUid eq 'admin'}">
-                     <a href="/jw/ch09/user/delete?uid=${user.uid}">삭제</a>
-                  </c:if> <c:if test="${user.uid ne sessUid and sessUid ne 'admin'}">
-                     <a href="#" disabled>삭제</a>
-                  </c:if>
-            </tr>
-         </c:forEach>
-      </tr>
-   </table>
+   <%@ include file="../../common/_top.jspf"%>
+
+   <div class="container" style="margin-top: 80px">
+      <div class="row">
+         <%@ include file="../../common/_aside.jspf"%>
+         <div class="col-9">
+            <h3><strong class="me-5">사용자 목록</strong>
+               <span style="font-size: 16px;"><a href="/jw/ch09/user/register"><i class="fa-solid fa-user-plus"></i>사용자 가입</a></span>
+              </h3>
+              <hr>
+              <div class="row">
+                 <div class="col-1"></div>
+                 <div class="col-10">
+                 <table class="table">
+                    <tr>
+                       <th>아이디</th>
+                     <th>이름</th>
+                     <th>이메일</th>
+                     <th>등록일</th>
+                     <th>액션</th>
+                  </tr>
+                  <c:forEach var="user" items="${list}">
+                  <tr>
+                     <td>${user.uid}</td>
+                     <td>${user.uname}</td>
+                     <td>${user.email}</td>
+                     <td>${user.regDate}</td>
+                     <!-- 본인만 수정가능하고, 관리자와 본인이 삭제 가능. 서로 드모르간법칙으로 반대 설정 -->
+                     <td>
+                        <c:if test="${user.uid eq sessUid}">
+                           <a href="/jw/ch09/user/update?uid=${user.uid}"><i class="fa-solid fa-user-pen"></i></a>
+                        </c:if> 
+                        <c:if test="${user.uid ne sessUid}">
+                           <a href="#" class="disabled-link"><i class="fa-solid fa-user-pen"></i></a>
+                        </c:if> 
+                        <c:if test="${user.uid eq sessUid or sessUid eq 'admin'}">
+                           <a class="ms-2" href="/jw/ch09/user/delete?uid=${user.uid}"><i class="fa-solid fa-user-minus"></i></a>
+                        </c:if> 
+                        <c:if test="${user.uid ne sessUid and sessUid ne 'admin'}">
+                           <a class="ms-2 disabled-link" href="#"><i class="fa-solid fa-user-minus"></i></a>
+                        </c:if>
+                     </td>
+                  </tr>
+                  </c:forEach>
+                 </table>
+            </div>
+              <div class="col-1"></div>
+              </div>
+         </div>
+      </div>
+   </div>
+   <%@ include file="../../common/_bottom.jspf"%>
 </body>
 </html>
