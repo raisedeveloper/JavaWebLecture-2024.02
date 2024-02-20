@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 @WebServlet({ "/ch09/user/list", "/ch09/user/register", "/ch09/user/update", "/ch09/user/delete", "/ch09/user/login",
 		"/ch09/user/logout" })
 public class UserController extends HttpServlet {
@@ -24,7 +26,7 @@ public class UserController extends HttpServlet {
 		String method = request.getMethod();
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = null;
-		String uid = null, pwd = null, pwd2 = null, uname = null, email = null; 
+		String uid = null, pwd = null, pwd2 = null, uname = null, email = null, hashedPwd = null;
 		String msg = null, url = null;
 		User user = null; 
 
@@ -40,7 +42,8 @@ public class UserController extends HttpServlet {
 		}
 		case "login":
 			if (method.equals("GET")) {
-				rd = request.getRequestDispatcher("/ch09/user/login.jsp");
+				//rd = request.getRequestDispatcher("/ch09/user/login.jsp");
+				rd = request.getRequestDispatcher("/ch09/user/loginBS.jsp");
 				rd.forward(request, response);
 		} else {
 			uid = request.getParameter("uid");
@@ -78,13 +81,40 @@ public class UserController extends HttpServlet {
 			}
 			break;
 		}
-		case "update": {
-			break;
-		}
-		case "delete": {
-			break;
-		}
+	      case "update": {
+	          if (method.equals("GET")) {
+	             uid = request.getParameter("uid");
+	             user = uSvc.getUserByUid(uid);
+//	             rd = request.getRequestDispatcher("/ch09/user/update.jsp");
+	             rd = request.getRequestDispatcher("/ch09/user/updateBS.jsp");
+	             request.setAttribute("user", user);
+	             rd.forward(request, response);
+	          } else {
+	             uid = request.getParameter("uid");
+	             pwd = request.getParameter("pwd");
+	             pwd2 = request.getParameter("pwd2");
+	             hashedPwd = request.getParameter("hashedPwd");
+	             uname = request.getParameter("uname");
+	             email = request.getParameter("email");
+	             if (pwd != null && pwd.equals(pwd2))
+	                hashedPwd = BCrypt.hashpw(pwd, BCrypt.gensalt());
+	             user = new User(uid, hashedPwd, uname, email);
+	             uSvc.updateUser(user);
+	             response.sendRedirect("/jw/ch09/user/list?page=1");
+	          }
+	          break;
+	       }
+	       case "delete": {
+	          uid = request.getParameter("uid");
+	          uSvc.deleteUser(uid);
+	          String sessUid = (String) session.getAttribute("sessUid");
+	          if (!sessUid.equals("admin"))
+	             session.invalidate();
+	          response.sendRedirect("/jw/ch09/user/list?page=1");
+	          break;
+	       }
+
+	       }
 
 		}
 	}
-}

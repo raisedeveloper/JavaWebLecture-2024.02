@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+		<div class="col-3">
+			<img src="https://picsum.photos/256/256" class="rounded-circle" width="90%">
+			<div class="mt-2">
+				무엇이든지 즐거운 마음으로 해보자! <a href="#"><span class="badge bg-secondary">수정</span></a>
+			</div>
+			<div class="mt-5">
+				<i class="fa fa-envelope me-2"></i>ilove4903@naver.com<br> <i
+					class="fa-brands fa-github me-2"></i><a href="#">develop_yunju</a><br>
+				<i class="fa-brands fa-instagram me-2"></i><a href="#">@lovely.insight</a><br>
+				<i class="fa-solid fa-location-dot me-2"></i> 수원시 권선구 <a href="#"><span
+					class="badge bg-secondary">날씨</span></a><br>
+				<button class="btn btn-sm btn-outline-primary mt-3">Edit Profile</button>
+			</div>
+		</div>

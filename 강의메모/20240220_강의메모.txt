@@ -87,3 +87,27 @@ request 파라메터
 필터는 마음 껏 매달 수 있음 
 == 자바만 그런 것이 아니라 node.js 에서 익스프레스를 씀  
 필터라는 말 대신 middleware 쓰고 이것을 마구 끼어넣음
+
+ppt 11.4
+디렉티브 태그	<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+jsp file 안에
+alert msg == page 
+isErrorPage == 통상적으로 404= paage notfound, 500=server error or other errors 
+error page 화면을 예쁘게 꾸밀 수 있음
+
+include tag
+인크루드를 이용하면 페이지 쪼개기 가능
+쪼개기 실습
+이 것을 하기 위해서 user>register.jsp copy
+
+jQeury 제외됨 == 모든 나의 웹 페이지에 공통적으로 들어감 == 별도의 파일로 떼어냄
+font-awsome login 해서 폰트 내려받기
+
+--3교시--
+템플릿 생성 작업
+프로젝트를 위한 템플릿 작성
+
+--6교시--
+웹 페이지 실습
+http://localhost:8080/jw/ch09/user/login or register

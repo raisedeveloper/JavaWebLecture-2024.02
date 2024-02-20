@@ -2,17 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>회원 가입</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-   <style>
-      * { font-family: 'Noto Sans KR', sans-serif; }
-      a { text-decoration: none; }
-    td { text-align: center; }
-   </style>   
+	<%@ include file="_head.jspf" %>   
 </head>
 <body class="bg-light">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -34,8 +24,8 @@
             <form action="/jw/ch09/user/register" method="post">
               <table class="table table-borderless">
                 <tr>
-                  <td style="width: 50%;"><label class="col-form-label">사용자 ID</label></td>
-                  <td style="width: 50%;"><input type="text" name="uid" class="form-control"></td>
+                  <td style="width: 45%;"><label class="col-form-label">사용자 ID</label></td>
+                  <td style="width: 55%;"><input type="text" name="uid" class="form-control"></td>
                 </tr>
                 <tr>
                   <td><label class="col-form-label">패스워드</label></td>
@@ -47,7 +37,7 @@
                 </tr>
                 <tr>
                   <td><label class="col-form-label">사용자 이름</label></td>
-                  <td><input type="text" name="uname" class="form-control"></td>
+                  <td><input type="text" name="name" class="form-control"></td>
                 </tr>
                 <tr>
                   <td><label class="col-form-label">이메일</label></td>

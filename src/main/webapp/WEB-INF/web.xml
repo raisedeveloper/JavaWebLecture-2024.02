@@ -228,14 +228,4 @@
     <servlet-name>FilterTest</servlet-name>
     <url-pattern>/FilterTest</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LoginCheckFilter</display-name>
-    <servlet-name>LoginCheckFilter</servlet-name>
-    <servlet-class>ch10_filter.LoginCheckFilter</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginCheckFilter</servlet-name>
-    <url-pattern>/LoginCheckFilter</url-pattern>
-  </servlet-mapping>
 </web-app>
