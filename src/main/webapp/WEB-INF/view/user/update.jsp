@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <%@ include file="../../common/_head.jspf"%>
+   <%@ include file="../common/_head.jspf"%>
 </head>
-   <%@ include file="../../common/_top.jspf"%>
+   <%@ include file="../common/_top.jspf"%>
 
    <div class="container" style="margin-top: 80px;">
       <div class="row">
-         <%@ include file="../../common/_aside.jspf"%>
+         <%@ include file="../common/_aside.jspf"%>
    
          <div class="col-9">
          <h3><strong>사용자 수정</strong></h3>
@@ -18,7 +18,7 @@
               <div class="row" style = "text-align: center">
                  <div class="col-3"></div>
                  <div class="col-6">
-                  <form action="/jw/ch09/user/update" method="post">
+                  <form action="/jw/bbs/user/update" method="post">
 	                      <input type="hidden" name="uid" value="${user.uid}"> 
 	                      <input type="hidden" name="hashedPwd" value="${user.pwd}"> 
 	                      <table class="table table-borderless">
@@ -56,6 +56,6 @@
          </div>
       </div>
    </div>
-   <%@ include file="../../common/_bottom.jspf"%>
+   <%@ include file="../common/_bottom.jspf"%>
 </body>
 </html>

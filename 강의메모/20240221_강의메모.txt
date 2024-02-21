@@ -1,0 +1,14 @@
+--3교시--
+<h1>JSP Standard Tag Library(JSTL) - Core</h1>
+서버를 띄운 상태에서
+ch09 user listBS updateBS 등의 주소를
+외부에서 입력해서 유입했을 때
+http://localhost:8080/jw/ch14/ex13_fn.jsp
+외부에서 허용된 주소로만 들어갈 수 있고
+webinf 안에 JSP file 을 넣어놓으면 검색해서 유입될 수 없음
+*Project package
+folder 여러 개 생성
+Entity 
+Controller
+Dao
+최소한 3개 만들기
