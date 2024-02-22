@@ -2,55 +2,51 @@ package project.entity;
 
 import java.time.LocalDateTime;
 
-public class board {
+public class Board {
 	private int bid;
 	private String title;
 	private String content;
 	private String uid;
-	private LocalDateTime motTime;
+	private LocalDateTime modTime;
 	private int isDeleted;
 	private int viewCount;
 	private int replyCount;
 	private String uname;	// user stable 과 join 해서 얻게 될 내용
 	
-	
-	public board() { }
+	public Board() { }
 	
 	// 게시글 생성 할 때 필요한 생성자만 나열(미리 세팅)
-	public board(String title, String content, String uid) {
+	public Board(String title, String content, String uid) {
 		this.title = title;
 		this.content = content;
 		this.uid = uid;
 	}
 
 	// 게시글 수정할 때 필요한 생성자만 나열(update 상황 가정 - 미리 세팅)
-	public board(int bid, String title, String content, String uid) {
+	public Board(int bid, String title, String content, String uid) {
 		this.bid = bid;
 		this.title = title;
 		this.content = content;
 		this.uid = uid;
-		
-		
 	}
 
 	// 코드를 쉽게 쓰기 위해 게시글 목록 생성자만 나열
-	public board(int bid, String title, LocalDateTime motTime, int viewCount, int replyCount, String uname) {
-		super();
+	public Board(int bid, String title, LocalDateTime modTime, int viewCount, int replyCount, String uname) {
 		this.bid = bid;
 		this.title = title;
-		this.motTime = motTime;
+		this.modTime = modTime;
 		this.viewCount = viewCount;
 		this.replyCount = replyCount;
 		this.uname = uname;
 	}
 
-	public board(int bid, String title, String content, String uid, LocalDateTime motTime, int isDeleted, int viewCount,
+	public Board(int bid, String title, String content, String uid, LocalDateTime modTime, int isDeleted, int viewCount,
 			int replyCount, String uname) {
 		this.bid = bid;
 		this.title = title;
 		this.content = content;
 		this.uid = uid;
-		this.motTime = motTime;
+		this.modTime = modTime;
 		this.isDeleted = isDeleted;
 		this.viewCount = viewCount;
 		this.replyCount = replyCount;
@@ -59,8 +55,8 @@ public class board {
 	
 	@Override
 	public String toString() {
-		return "board [bid=" + bid + ", title=" + title + ", content=" + content + ", uid=" + uid + ", motTime="
-				+ motTime + ", isDeleted=" + isDeleted + ", viewCount=" + viewCount + ", replyCount=" + replyCount
+		return "board [bid=" + bid + ", title=" + title + ", content=" + content + ", uid=" + uid + ", modTime="
+				+ modTime + ", isDeleted=" + isDeleted + ", viewCount=" + viewCount + ", replyCount=" + replyCount
 				+ ", uname=" + uname + "]";
 	}
 	
@@ -88,11 +84,11 @@ public class board {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public LocalDateTime getMotTime() {
-		return motTime;
+	public LocalDateTime getmodTime() {
+		return modTime;
 	}
-	public void setMotTime(LocalDateTime motTime) {
-		this.motTime = motTime;
+	public void setmodTime(LocalDateTime modTime) {
+		this.modTime = modTime;
 	}
 	public int getIsDeleted() {
 		return isDeleted;

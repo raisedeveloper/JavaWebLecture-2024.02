@@ -2,21 +2,20 @@ package project.service;
 
 import java.util.List;
 
-import project.entity.board;
-
+import project.entity.Board;
 
 public interface BoardService {
     public static final int COUNT_PER_PAGE = 10;
     
-	List<board> getBoardList(int page, String field, String query);
+	List<Board> getBoardList(int page, String field, String query);
 	
-	board getBoard(int bid);
+	Board getBoard(int bid);
 
 	int getBoardCount();
 	
-	void insertBoard(board board);
+	void insertBoard(Board board);
 	
-	void updateBoard(board board);
+	void updateBoard(Board board);
 	
 	void deleteBoard(int bid);
 	

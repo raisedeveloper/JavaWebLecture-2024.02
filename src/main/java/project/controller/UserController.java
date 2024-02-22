@@ -54,9 +54,6 @@ public class UserController extends HttpServlet {
         	 pageList.add(String.valueOf(i));	// i 를 String 으로 바꿔줌
          request.setAttribute("pageList", pageList);
 
-         
-         
-         
 //         rd = request.getRequestDispatcher("/WEB-INF/view/user/list.jsp");
          rd = request.getRequestDispatcher("/WEB-INF/view/user/list.jsp");
 
@@ -108,7 +105,7 @@ public class UserController extends HttpServlet {
                session.setAttribute("sessUid", uid);
                session.setAttribute("sessUname", user.getUname());
                msg = user.getUname() + "님 환영합니다.";
-               url = "/jw/bbs/user/list?page=1"; // 초기화면
+               url = "/jw/bbs/board/list?p=1"; // 초기화면
             } else if (result == uSvc.WRONG_PASSWORD) {
                msg = "패스워드가 틀립니다.";
                url = "/jw/bbs/user/login";
