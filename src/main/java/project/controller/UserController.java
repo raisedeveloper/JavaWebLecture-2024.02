@@ -12,6 +12,7 @@ import project.service.UserService;
 import project.service.UserServiceImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -35,14 +36,27 @@ public class UserController extends HttpServlet {
       String uid = null, pwd = null, pwd2 = null, hashedPwd = null, email = null, uname = null;
       String msg = null, url = null;
       User user = null;
-      List<User> list = null;
 
       switch (action) {
       case "list": {
          String page_ = request.getParameter("page");
          int page = (page_ == null || page_.equals("")) ? 1 : Integer.parseInt(page_);
-         list = uSvc.getUserList(page);
-         request.setAttribute("list", list);
+         session.setAttribute("currentUserPage", page);
+         List<User>userList = uSvc.getUserList(page);
+         request.setAttribute("userList", userList);
+         
+         // for pagination
+         int totalUsers = uSvc.getUserCount();	// 유저의 명수 출력
+         int totalPages = (int) Math.ceil(totalUsers * 1.0 / uSvc.count_per_page);
+        		 // 유저 목록 페이지 출력 ex> 12일 때 2 페이지 출력
+         List<String> pageList = new ArrayList<>();
+         for (int i = 1; i <= totalPages; i++)
+        	 pageList.add(String.valueOf(i));	// i 를 String 으로 바꿔줌
+         request.setAttribute("pageList", pageList);
+
+         
+         
+         
 //         rd = request.getRequestDispatcher("/WEB-INF/view/user/list.jsp");
          rd = request.getRequestDispatcher("/WEB-INF/view/user/list.jsp");
 

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,4 +124,22 @@ public class UserDao {
             e.printStackTrace();
         }
     }
+	
+	public int getUserCount() {
+		Connection conn = getConnection();
+		String sql ="select count(uid) from users where isDeleted=0";
+		int count = 0;
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) { 
+				count = rs.getInt(1);	//	데이터 하나라도 이런식으로 가져와야 함
+			}
+			rs.close(); stmt.close(); conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 }
