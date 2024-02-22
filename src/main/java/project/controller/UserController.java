@@ -31,8 +31,8 @@ public class UserController extends HttpServlet {
       String action = uri[uri.length - 1];
       String method = request.getMethod();
       HttpSession session = request.getSession();
-
       RequestDispatcher rd = null;
+      
       String uid = null, pwd = null, pwd2 = null, hashedPwd = null, email = null, uname = null;
       String msg = null, url = null;
       User user = null;

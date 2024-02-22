@@ -9,12 +9,6 @@
 		td, th {text-align: center;}
 		.disabled-link{pointer-events: none;}
 	</style>
-	<script>
-		function deleteFunc(uid) {
-			$('#deleteUid').val(uid);
-			$('#deleteModal').modal('show');
-		}
-	</script>
 </head>
 <body>
    <%@ include file="../common/_top.jspf"%>
@@ -63,20 +57,21 @@
                   </tr>
                   </c:forEach>
                  </table>
-                 <%-- pagination https://www.w3schools.com/bootstrap5/bootstrap_pagination.php --%>
-                 <ul class="pagination justify-content-center mt-4">
+                <%-- pagination https://www.w3schools.com/bootstrap5/bootstrap_pagination.php --%>
+              <%--    <ul class="pagination justify-content-center mt-4">
 					  <li class="page-item"><a class="page-link" href="#"><i class="fa-solid fa-less-than"></i></a></li>
 					  <c:forEach var="page" items="${pageList}">
 					  	 <li class="page-item ${currentUserPpage eq page ? 'active' : '' }">
 					  	 	<a class="page-link" href="/jw/bbs/user/list?page=${page}">${page}</a>
 					  	 	</li>
 					  </c:forEach>
+					  from here
 			<%--	  <li class="page-item"><a class="page-link" href="#">1</a></li>
 					  <li class="page-item active"><a class="page-link" href="#">2</a></li>
 					  <li class="page-item"><a class="page-link" href="#">3</a></li>	
-					 위의 3줄이 <ul class= ~ </li> 안으로 들어간 형태로 변형시킴 --%>
+					 위의 3줄이 <ul class= ~ </li> 안으로 들어간 형태로 변형시킴 
 					  <li class="page-item"><a class="page-link" href="#"><i class="fa-solid fa-greater-than"></i></a></li>
-				</ul>
+				</ul> --%>
             </div>
               <div class="col-1"></div>
               </div>
@@ -85,27 +80,5 @@
    </div>
    
    	<%@ include file="../common/_bottom.jspf"%>
-	<div class="modal" id="deleteModal"> 
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">사용자 탈퇴</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-				
-				<!-- Modal body -->
-				<div class="modal-body">
-					<strong>정말로 탈퇴하시겠습니까?</strong>
-					<div class="text-center mt-5">
-						<form action="/jw/bbs/user/delete" method="post">
-							<input type="hidden" id="deleteUid" name="uid">
-							<button class="btn btn-danger" type="submit">탈퇴</button>
-						</form>					
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

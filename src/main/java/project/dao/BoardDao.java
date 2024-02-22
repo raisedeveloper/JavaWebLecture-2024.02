@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,9 +70,9 @@ public class BoardDao {
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-			board board = new board(rs.getInt(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
-						rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9)); 
+			board board = new board(rs.getInt(1), rs.getString(2),  
+						  LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
+						  rs.getInt(7), rs.getInt(8), rs.getString(9)); 
 			list.add(board);
 		
 			}	rs.close(); pstmt.close();
@@ -132,5 +133,22 @@ public class BoardDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getBoardCount() {
+		Connection conn = getConnection();
+		String sql = "select count(bid) from board where isDeleted=0";
+		int count = 0;
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+			rs.close(); stmt.close(); conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 }

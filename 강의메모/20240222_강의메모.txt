@@ -6,4 +6,5 @@ http://localhost:8080/jw/bbs/user/list
 
 사용자 수를 세는 코드 작성
 
---2교시--
+--2교시 ~ 4교시--
+Project Template 생성
