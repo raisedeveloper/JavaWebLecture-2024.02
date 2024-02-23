@@ -32,13 +32,17 @@ td, th {
 			<!--  ================================= 본문 영역 ================================= -->
 			<div class="col-9">
 				<h3><strong class="me-5">게시글 보기</strong>
-						<c:if test="${sessUid eq board.uid}">			<!-- 본인만 수정/삭제 가능 -->
 								<span style="font-size: 16px;">
-								<a href="/jw/bbs/board/update?bid=${board.bid}">&nbsp;<i class="fa-solid fa-pen-to-square"></i>수정</a>
-								
+				<a href="/jw/bbs/board/list?p=${currentBoardPage}&f=${fieldf}&q=${query}"><i class="fa-solid fa-table-list"></i>목록</a>
+						<c:if test="${sessUid eq board.uid}">			<!-- 본인만 수정/삭제 가능 -->
+								<a href="/jw/bbs/board/update?bid=${board.bid}">&nbsp;<i class="fa-solid fa-pen-to-square"></i>수정</a>					
 								<a href="javascript:deleteFunc('${board.bid}')">&nbsp;<i class="fa-solid fa-trash ms-3"></i>삭제</a>
-								</span>
 						</c:if>
+						<c:if test="${sessUid ne board.uid}">			<!-- 본인만 수정/삭제 가능 -->
+								<a href="#" class="disabled-link"><i class="fa-solid fa-pen-to-square"></i>수정</a>					
+								<a href="#" class="disabled-link"><i class="fa-solid fa-trash ms-3"></i>삭제</a>
+						</c:if>
+						</span>
 				</h3>
 				<hr>
 				<div class="row">
@@ -59,7 +63,7 @@ td, th {
 	   </div>
     </div>
    </div>
- </div>
+  </div>
 
 
 	<%@ include file="../common/_bottom.jspf"%>

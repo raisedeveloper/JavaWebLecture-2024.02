@@ -19,16 +19,16 @@ import project.entity.User;
 
 public class UserDao {
 	public Connection getConnection() {
-    		Connection conn = null;
-    		try {
-    			Context initContext = new InitialContext();
-    			DataSource ds = (DataSource) initContext.lookup("java:comp/env/" + "jdbc/bbs"); // context에 추가한 부분의 name
-    			conn = ds.getConnection();
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
-    		return conn;
-    	}
+		Connection conn = null;
+		try {
+			Context initContext = new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:comp/env/" + "jdbc/bbs"); // context에 추가한 부분의 name
+			conn = ds.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
 
 	public User getUserByUid(String uid) {
 		Connection conn = getConnection();
@@ -141,5 +141,4 @@ public class UserDao {
 		}
 		return count;
 	}
-	
 }

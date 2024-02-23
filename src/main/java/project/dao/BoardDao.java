@@ -43,9 +43,9 @@ public class BoardDao {
 						
 			ResultSet rs = pstmt.executeQuery();// 쿼리 실행 sql이 pstmt에 담겨있고 execute 실행
 			while (rs.next()) {
-			board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
-						rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9)); 
+			board =  new Board(rs.getInt(1), rs.getString(2), rs.getString(3), 
+					rs.getString(4), LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
+					rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9)); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,9 +70,9 @@ public class BoardDao {
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-			Board board = new Board(rs.getInt(1), rs.getString(2),  
-						  LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
-						  rs.getInt(7), rs.getInt(8), rs.getString(9)); 
+			Board board =  new Board(rs.getInt(1), rs.getString(2), rs.getString(3), 
+					rs.getString(4), LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
+					rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9)); 
 			list.add(board);
 		
 			}	rs.close(); pstmt.close();

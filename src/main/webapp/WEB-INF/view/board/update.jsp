@@ -26,10 +26,11 @@
 					<div class="col-10">
 						<form action="/jw/bbs/board/update" method="post">
 							<input type="hidden" name="bid" value="${board.bid}">
+							<input type="hidden" name="uid" value="${board.uid}">
 							<table class="table table-borderless">
 								<tr>
 									<td style="width: 10%;"><label class="col-form-label">제목</label></td>
-									<td style="width: 90%;"><input type="text" name="title" value="${board.title}" class=" class=form-control"></td>
+									<td style="width: 90%;"><input type="text" name="title" value="${board.title}" class="form-control"></td>
 								</tr>
 								<tr>
 									<td><label class="col-form-label">내용</label></td>

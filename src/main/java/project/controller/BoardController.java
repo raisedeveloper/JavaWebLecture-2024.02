@@ -28,9 +28,13 @@ public class BoardController extends HttpServlet {
 		String method = request.getMethod();
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = null;
-		String title = "", content = "", sessUid = "", field="", query = "", page_="";
+		String title = "", content = "", field="", query = "", page_="", uid = "";
 		Board board = null; 
-		int bid, page= 0; 
+		int bid, page= 0;
+		String sessUid = (String) session.getAttribute("sessUid");
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
 	      
 	    switch(action) {
 	    case "list":		// /jw/bbs/board/list?p=1&f=title&q=검색
@@ -60,7 +64,6 @@ public class BoardController extends HttpServlet {
 	    	break;
     	  
     	case "insert":
-			sessUid = (String) session.getAttribute("sessUid");
 			if (sessUid == null || sessUid.equals("")) {
 			response.sendRedirect("/jw/bbs/user/login");
 			break;
@@ -80,13 +83,19 @@ public class BoardController extends HttpServlet {
 			break;
     	  
     	case "detail":
-			bid = Integer.parseInt(request.getParameter("bid"));	// 부를 수 있는 방법 == 클릭 (안전장치를 했으니 그냥 쓰면 됨)
-			bSvc.increaseViewCount(bid);		// 자기 글 일때 Count 세지 않는 기능 - 나중에 구현!! 2024-02-22 이 시점엔 미구현
+    		// 부를 수 있는 방법 == 클릭 (안전장치를 했으니 그냥 쓰면 됨)
+			bid = Integer.parseInt(request.getParameter("bid"));	
+			uid = request.getParameter("uid");
+			// 자기 글 일때 Count 세지 않는 기능 - 나중에 구현!! 2024-02-22 이 시점엔 미구현
+			if (!uid.equals(sessUid))
+				bSvc.increaseViewCount(bid);
+				
 			  
 			board = bSvc.getBoard(bid);
 			request.setAttribute("board", board);
 			  
-			List<Reply> replyList = null;		// 댓글 목록도 필요 - 나중에 구현!!! 2024-02-22 이 시점엔 미구현
+			// 댓글 목록도 필요 - 나중에 구현!!! 2024-02-22 이 시점엔 미구현
+			List<Reply> replyList = null;		
 			request.setAttribute("replyList", replyList);
 			  
 			rd = request.getRequestDispatcher("/WEB-INF/view/board/detail.jsp");
@@ -113,12 +122,13 @@ public class BoardController extends HttpServlet {
     			rd.forward(request, response);
     		} else {
     			bid = Integer.parseInt(request.getParameter("bid"));
+    			uid = request.getParameter("uid");
     			title = request.getParameter("title");
     			content = request.getParameter("content");
     			board = new Board(bid, title, content);
     			
     			bSvc.updateBoard(board);
-    			response.sendRedirect("/jw/bbs/board/detail?bid=" + bid);
+    			response.sendRedirect("/jw/bbs/board/detail?bid=" + bid + "&uid=" + uid);
     		}
     		break;
     	}
