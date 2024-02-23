@@ -98,6 +98,7 @@ public class BoardDao {
 
 	            pstmt.executeUpdate();
 	            pstmt.close();
+	            conn.close();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -105,16 +106,21 @@ public class BoardDao {
 
 	public void updateBoard(Board board) {
 		Connection conn = getConnection();
-		String sql = "update board set title=?, content=?, bid=? where bid=?";
+		String sql = "update board set title=?, content=?, modTime=now() where bid=?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setInt(3, board.getBid());
 			
 			pstmt.executeUpdate();
 			pstmt.close();
-		} catch (Exception e) {
+			conn.close();
+			} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public void deleteBoard(int bid) {
 		Connection conn = getConnection();
 		String sql = "update board set isDeleted=1 where bid=?";
@@ -140,6 +146,7 @@ public class BoardDao {
 
 			pstmt.executeUpdate();
 			pstmt.close();
+			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,7 +157,7 @@ public class BoardDao {
 		query = "%" + query + "%";
 		String sql = "SELECT COUNT(bid) FROM board"
 				+ "	JOIN users ON board.uid=users.uid"
-				+ "	WHERE board.isDeleted=0 and " + field + "LIKE ?";
+				+ "	WHERE board.isDeleted=0 and " + field + " LIKE ?";
 		int count = 0;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);

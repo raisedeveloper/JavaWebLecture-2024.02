@@ -73,6 +73,7 @@ td, th {
             <div class="modal-body">정말로 삭제하시겠습니까?
                <div class="text-center mt-5">
                   <form action="/jw/bbs/board/delete" method="post">
+                  	 <input type="hidden" id="deleteBid" name="bid">
                      <button class="btn btn-danger" type="submit">삭제</button>      
                   </form>
                </div>

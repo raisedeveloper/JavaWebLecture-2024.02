@@ -23,11 +23,10 @@ public class Board {
 	}
 
 	// 게시글 수정할 때 필요한 생성자만 나열(update 상황 가정 - 미리 세팅)
-	public Board(int bid, String title, String content, String uid) {
+	public Board(int bid, String title, String content) {
 		this.bid = bid;
 		this.title = title;
 		this.content = content;
-		this.uid = uid;
 	}
 
 	// 코드를 쉽게 쓰기 위해 게시글 목록 생성자만 나열

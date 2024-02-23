@@ -123,7 +123,7 @@ public class UserController extends HttpServlet {
       case "logout": {
          // session을 정리하면 된다.
          session.invalidate();
-         response.sendRedirect("/jw/bbs/user/list?page=1");
+         response.sendRedirect("/jw/bbs/user/login");
          break;
       }
       case "update": {
