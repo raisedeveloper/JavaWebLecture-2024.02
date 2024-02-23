@@ -1,0 +1,10 @@
+--1교시--
+어제 만든 페이지에 이어서 '게시물 삭제' 기능 추가 하기 실습
+
+--2교시--
+실습 해설
+
+USE bbs;
+SELECT COUNT(bid) FROM board
+	JOIN users ON board.uid=users.uid
+	WHERE board.isDeleted=0 and uname LIKE '%제임스%;

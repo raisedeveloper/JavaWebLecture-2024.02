@@ -16,6 +16,12 @@ td, th {
 	pointer-events: none;
 }
 </style>
+<script>
+	function deleteFunc(bid) {
+		 $('#deleteBid').val(bid);
+		 $('#deleteModal').modal('show');
+	}
+</script>
 </head>
 <body>
 	<%@ include file="../common/_top.jspf"%>
@@ -30,14 +36,7 @@ td, th {
 								<span style="font-size: 16px;">
 								<a href="/jw/bbs/board/update?bid=${board.bid}">&nbsp;<i class="fa-solid fa-pen-to-square"></i>수정</a>
 								
-								<a href="/jw/bbs/board/delete?bid=${board.bid}">&nbsp;<i class="fa-solid fa-trash ms-3"></i>삭제</a>
-								</span>
-						</c:if>
-						<c:if test="${sessUid ne board.uid}">			<!-- 본인만 수정/삭제 가능 -->
-								<span style="font-size: 16px;">
-								<a href="#" class="disabled-link"><i class="fa-solid fa-file-pen"></i>수정</a>
-								
-								<a href="#" class="disabled-link"><i class="fa-solid fa-trash"></i>삭제</a>
+								<a href="javascript:deleteFunc('${board.bid}')">&nbsp;<i class="fa-solid fa-trash ms-3"></i>삭제</a>
 								</span>
 						</c:if>
 				</h3>
@@ -57,8 +56,29 @@ td, th {
 							
 				<!--  ================================= 본문 영역 ================================= -->
 			</div>
-		</div>
-	</div>
+	   </div>
+    </div>
+   </div>
+ </div>
+
+
 	<%@ include file="../common/_bottom.jspf"%>
+	<div class="modal" id="deleteModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title">게시글 삭제</h4>
+               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">정말로 삭제하시겠습니까?
+               <div class="text-center mt-5">
+                  <form action="/jw/bbs/board/delete" method="post">
+                     <button class="btn btn-danger" type="submit">삭제</button>      
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>

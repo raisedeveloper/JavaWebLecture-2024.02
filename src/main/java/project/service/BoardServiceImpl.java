@@ -23,11 +23,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int getBoardCount() {
-		return bDao.getBoardCount();
-	}
-
-	@Override
 	public void insertBoard(Board board) {
 		bDao.insertBoard(board);
 	}
@@ -38,6 +33,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void deleteBoard(int bid) {
+		bDao.deleteBoard(bid);
 	}
 
 	// 이하는 일타 쌍피 코드 : 아래 두 함수는 boardDao의 increaseViewCount를 공유함.
@@ -49,6 +45,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void increaseReplyCount(int bid) {
 		bDao.increaseCount("reply", bid);
+	}
+
+	@Override
+	public int getBoardCount(String field, String query) {
+		return bDao.getBoardCount();
 	}
 
 }

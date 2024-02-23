@@ -117,7 +117,17 @@ public class BoardDao {
 	}
 	public void deleteBoard(int bid) {
 		Connection conn = getConnection();
-		String sql = "update board set isDelete where bid=?";
+		String sql = "update board set isDeleted=1 where bid=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	// field 값은 view 또는 reply 가져감
 	public void increaseCount(String field, int bid) {
@@ -135,17 +145,21 @@ public class BoardDao {
 		}
 	}
 	
-	public int getBoardCount() {
+	public int getBoardCount(String field, String query) {
 		Connection conn = getConnection();
-		String sql = "select count(bid) from board where isDeleted=0";
+		query = "%" + query + "%";
+		String sql = "SELECT COUNT(bid) FROM board"
+				+ "	JOIN users ON board.uid=users.uid"
+				+ "	WHERE board.isDeleted=0 and " + field + "LIKE ?";
 		int count = 0;
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, query);
+			ResultSet rs = pstmt.executeQuery(sql);
 			while (rs.next()) {
 				count = rs.getInt(1);
 			}
-			rs.close(); stmt.close(); conn.close();
+			rs.close(); pstmt.close(); conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
