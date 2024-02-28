@@ -28,9 +28,21 @@ public class ProductController extends HttpServlet {
 	HttpSession session = request.getSession();
 	RequestDispatcher rd = null;
 	
-	seitch(action) {
+	switch(action) {
 		case "insert":
-			
-	}
-  }
+			if (method.equals("GET")) {
+				rd = request.getRequestDispatcher("/WEB-INF/view/product/insert.jsp");
+				rd.forward(request, response);
+			} else {
+				String category = request.getParameter("category");
+				String pname = request.getParameter("pname");
+				String price_ = request.getParameter("category");
+				int price = Integer.parseInt(price_);
+				String description = request.getParameter("description");
+				Part filePart = request.getPart("imgFile");
+			}
+			break;
+
+    }
+  }   
 }
