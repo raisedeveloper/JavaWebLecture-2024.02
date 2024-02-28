@@ -1,0 +1,25 @@
+DB에는 파일이름만 넣어서 주면 DB에서 파일네임을 가지고 와서 cas "view" URL을 잡아주면 됩니다. 
+Product 안에 있을 필요도 없고 이름을 /jw/bbs/file/view?filenmae=something 으로 설정해도 됩니다.
+somthing view 코드에서는 file name을 파라마터에서 받아서 업로드 해주면 됩니다. 
+단순히 이미지를 이미지 패스에 넣어서 jst파일에서 하는 게 아니라 
+view 조회 기능 주소를 생성해서 클라이언트와 사용자가 협의가 있어야함. 
+별도의 컨트롤러를 만들어서 작동시키기. 
+업로드 할 때 insert 에 가서 input type file placeholder는 쓸모 없어서 삭제하세요. 
+지우고 그 자리에 multiple을 넣으면 file을 하나가 아니라 여러개를 업로드 할 수 있게 됩니다. 
+get parts 여러개 get part 하나만 업로드하는 기능입니다.
+
+스퀘어 이미지 
+사진 폴더에 가로로 긴 사진 - 정사각형으로 삽입하고 싶을 때
+public class product Controller
+squareInsert imageUtil = new ImageUtil();
+squreImage 호출
+사이즈 사이즈
++----+---+
+|    |   | size 잘라서 중간부분만 출력되게 함
+|    |---+
+|    |
++----+
+세로 가로
+
+ERD ERM table
+routing table - notion 에 업로드
