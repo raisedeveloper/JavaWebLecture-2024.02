@@ -1,0 +1,5 @@
+path variable
+
+uid주는 방법
+10년전	/bbs/board/detail?uid=james&bid=101	_ 
+현재	/bbs/board/detail/james/101

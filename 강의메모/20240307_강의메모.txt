@@ -1,0 +1,9 @@
+sample project _ bbs 사용
+추가할 사항
+1. board _ 첨부파일을 추가하세요.
+2. ckeditor 사용하세요.
+3. user 에 profile 사진(이미지)과 git hub 와 insta 추가하세요.
+4. 일정관리 추가 (다음주)
+
+
+Bootstrap과 연결된 화면 구현하기

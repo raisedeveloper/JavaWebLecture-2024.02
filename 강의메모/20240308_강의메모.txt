@@ -1,0 +1,9 @@
+SampleProject 진행
+
+작업순서
+aside profile 상태메시지 수정하기
+1. 현재 쓰여있는 상태메세지 읽기 
+2. server 에게 전송 
+3. server 는 session.stateMsg 의 새로운 내용추가
+4. 수정창은 숨김
+Ajax 사용
